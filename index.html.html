@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osa Peninsula · Aug 17–25</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canopy:#1F3A2E;
+    --canopy-light:#2E5443;
+    --sand:#F1E7CE;
+    --sand-deep:#E7D9B6;
+    --scarlet:#C1432B;
+    --gold:#E0A83F;
+    --teal:#2E7D6B;
+    --ink:#24261F;
+    --ink-soft:#5B5A4E;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; color:var(--canopy);}
+  a{color:var(--scarlet);}
+
+  /* Nav */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--canopy);
+    display:flex; align-items:center;
+    gap:4px;
+    padding:0 12px;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  nav a{
+    color:#EDE3C8;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    text-decoration:none;
+    padding:14px 12px;
+    letter-spacing:0.03em;
+    border-bottom:2px solid transparent;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  nav a:hover, nav a.active{
+    color:var(--gold);
+    border-bottom:2px solid var(--gold);
+  }
+
+  /* Hero */
+  .hero{
+    padding:72px 24px 56px;
+    text-align:center;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(46,125,107,0.12), transparent 45%),
+      radial-gradient(circle at 85% 75%, rgba(193,67,43,0.10), transparent 45%);
+  }
+  .hero .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    color:var(--teal);
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(34px, 6vw, 58px);
+    line-height:1.1;
+    max-width:760px;
+    margin:0 auto 16px;
+  }
+  .hero h1 em{font-style:italic; color:var(--scarlet);}
+  .hero p{
+    max-width:520px;
+    margin:0 auto;
+    color:var(--ink-soft);
+    font-size:16px;
+  }
+
+  section{
+    max-width:880px;
+    margin:0 auto;
+    padding:56px 24px;
+    scroll-margin-top:56px;
+  }
+  section + section{border-top:1px solid var(--sand-deep);}
+
+  .section-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:8px;
+  }
+  .section-title{
+    font-size:28px;
+    margin-bottom:28px;
+  }
+
+  /* Boarding pass */
+  .ticket{
+    background:var(--canopy);
+    color:#EDE3C8;
+    border-radius:14px;
+    display:flex;
+    position:relative;
+    overflow:hidden;
+  }
+  .ticket-main{
+    flex:1;
+    padding:28px 24px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
+    gap:20px;
+  }
+  .ticket-stub{
+    width:110px;
+    background:var(--canopy-light);
+    padding:24px 14px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    text-align:center;
+    position:relative;
+  }
+  .ticket-stub::before{
+    content:'';
+    position:absolute;
+    left:-8px; top:50%;
+    transform:translateY(-50%);
+    width:16px; height:16px;
+    background:var(--sand);
+    border-radius:50%;
+  }
+  .perf{
+    position:absolute;
+    left:calc(100% - 110px);
+    top:0; bottom:0;
+    width:0;
+    border-left:2px dashed rgba(237,227,200,0.35);
+  }
+  .ticket-field .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#A9B9AC;
+    margin-bottom:4px;
+  }
+  .ticket-field .value{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:15px;
+    color:#F6EFDC;
+  }
+  .ticket-stub .code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:22px;
+    font-weight:500;
+    color:var(--gold);
+  }
+  .ticket-stub .sub{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:#C7D2C6;
+  }
+  .ticket-note{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:14px;
+  }
+
+  /* Route trail */
+  .trail{
+    display:flex;
+    align-items:flex-start;
+    gap:0;
+    margin-top:8px;
+  }
+  .trail-stop{flex:1; position:relative; text-align:center;}
+  .trail-dot{
+    width:14px; height:14px;
+    border-radius:50%;
+    background:var(--scarlet);
+    margin:0 auto 10px;
+    position:relative;
+    z-index:2;
+  }
+  .trail-line{
+    position:absolute;
+    top:6px; left:50%; right:-50%;
+    height:2px;
+    background:repeating-linear-gradient(to right, var(--teal) 0 6px, transparent 6px 12px);
+    z-index:1;
+  }
+  .trail-stop:last-child .trail-line{display:none;}
+  .trail-stop .name{font-weight:600; font-size:14.5px; margin-bottom:2px;}
+  .trail-stop .dates{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--ink-soft);}
+
+  /* Field guide cards */
+  .stay-card{
+    background:#FBF6E8;
+    border:1px solid var(--sand-deep);
+    border-radius:10px;
+    padding:20px 22px;
+    margin-bottom:22px;
+  }
+  .stay-card h3{font-size:20px; margin-bottom:4px;}
+  .stay-card .stay-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+  }
+  .specimens{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:14px;
+  }
+  .specimen{
+    border:1px solid var(--sand-deep);
+    border-radius:8px;
+    padding:14px 16px;
+    background:var(--sand);
+  }
+  .specimen .fig{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--teal);
+    letter-spacing:0.05em;
+    margin-bottom:6px;
+  }
+  .specimen .name{font-weight:600; font-size:14.5px; margin-bottom:4px;}
+  .specimen .desc{font-size:13px; color:var(--ink-soft); margin-bottom:8px;}
+  .specimen a{font-size:12.5px; text-decoration:none; font-weight:500;}
+  .specimen a:hover{text-decoration:underline;}
+
+  /* Logistics */
+  .notebook{
+    background:#FBF6E8;
+    border:1px solid var(--sand-deep);
+    border-radius:10px;
+    padding:8px 24px;
+  }
+  .notebook li{
+    list-style:none;
+    padding:14px 0;
+    border-bottom:1px dashed var(--sand-deep);
+    display:flex;
+    gap:12px;
+    font-size:14.5px;
+  }
+  .notebook li:last-child{border-bottom:none;}
+  .notebook .tick{
+    width:16px; height:16px;
+    border:1.5px solid var(--teal);
+    border-radius:4px;
+    flex-shrink:0;
+    margin-top:2px;
+  }
+  .notebook b{color:var(--canopy);}
+
+  .ledger{
+    background:#FBF6E8;
+    border:1px solid var(--sand-deep);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .ledger-group{padding:18px 24px;}
+  .ledger-group + .ledger-group{border-top:1px solid var(--sand-deep);}
+  .ledger-group h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:10px;
+  }
+  .ledger-row{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:6px 0;
+    font-size:14px;
+  }
+  .ledger-row .item{color:var(--ink);}
+  .ledger-row .amt{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .ledger-total{
+    background:var(--canopy);
+    color:#EDE3C8;
+    padding:18px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  .ledger-total .label{font-family:'Fraunces', serif; font-size:17px;}
+  .ledger-total .amt{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:20px;
+    color:var(--gold);
+  }
+  .budget-note{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:14px;
+  }
+
+  footer{
+    text-align:center;
+    padding:32px 24px 48px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width: 640px){
+    .ticket{flex-direction:column;}
+    .ticket-stub{width:100%; flex-direction:row; justify-content:center; gap:16px;}
+    .ticket-stub::before{display:none;}
+    .perf{display:none;}
+    .trail{flex-direction:column; align-items:flex-start; gap:24px;}
+    .trail-line{top:6px; left:6px; right:auto; width:2px; height:calc(100% + 24px); background:repeating-linear-gradient(to bottom, var(--teal) 0 6px, transparent 6px 12px);}
+    .trail-stop{text-align:left; padding-left:22px;}
+    .trail-dot{margin:0 0 6px 0; position:absolute; left:0; top:0;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#logistics">Logistics</a>
+  <a href="#flight">Flight day</a>
+  <a href="#route">Route</a>
+  <a href="#dulce-olas">Dulce Olas</a>
+  <a href="#manuel-antonio">Manuel Antonio</a>
+  <a href="#san-jose">San José</a>
+  <a href="#budget">Budget</a>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Osa Peninsula & beyond</div>
+  <h1>Costa Rica, <em>August 17–25</em></h1>
+  <p>Your stop-by-stop guide from LAX to Puerto Jiménez, down the coast to Manuel Antonio, and back through San José — courtesy of James's notes.</p>
+</div>
+
+<section id="logistics">
+  <div class="section-label">Before you go</div>
+  <h2 class="section-title">Logistics & packing</h2>
+  <ul class="notebook">
+    <li><div class="tick"></div><div><b>Rental car return:</b> only the driver heading straight to the airport should return the car to Alamo — they'll get a shuttle. Everyone else needs an Uber. Going from the hotel instead? Book the hotel shuttle 24 hours ahead.</div></li>
+    <li><div class="tick"></div><div><b>Insurance:</b> mid-tier is on the reservation, but premium (~$150 more) is worth it for peace of mind.</div></li>
+    <li><div class="tick"></div><div><b>Getting around at Dulce Olas:</b> the motorcycle, the quad, or the surfboards left out for you.</div></li>
+    <li><div class="tick"></div><div><b>Last day:</b> on this itinerary you'll have until about noon to explore San José before heading to the airport.</div></li>
+    <li><div class="tick"></div><div><b>Packing:</b> carry-on only, no need for a lot of clothing.</div></li>
+    <li><div class="tick"></div><div><b>Depart Costa Rica:</b> August 25.</div></li>
+  </ul>
+</section>
+
+<section id="flight">
+  <div class="section-label">Day one</div>
+  <h2 class="section-title">Travel day</h2>
+  <div class="ticket">
+    <div class="ticket-main">
+      <div class="ticket-field">
+        <div class="label">Depart</div>
+        <div class="value">LAX</div>
+      </div>
+      <div class="ticket-field">
+        <div class="label">Connect</div>
+        <div class="value">SJO customs</div>
+      </div>
+      <div class="ticket-field">
+        <div class="label">Local hop</div>
+        <div class="value">SANSA · 3:00 PM</div>
+      </div>
+      <div class="ticket-field">
+        <div class="label">Landing</div>
+        <div class="value">~4:00 PM</div>
+      </div>
+    </div>
+    <div class="perf"></div>
+    <div class="ticket-stub">
+      <div class="code">PJM</div>
+      <div class="sub">Puerto Jiménez</div>
+    </div>
+  </div>
+  <p class="ticket-note">Check in with SANSA an hour before the flight — plenty of buffer either way. From LAX, park at one of the lots down the road; the ones running about $10/day include a shuttle. Alamo car rental is walking distance from the Jiménez airstrip — get the premium insurance (~$150 more than mid), then hit the BM grocery store in town before heading to the guesthouse.</p>
+</section>
+
+<section id="route">
+  <div class="section-label">The route</div>
+  <h2 class="section-title">Three stops, one loop</h2>
+  <div class="trail">
+    <div class="trail-stop">
+      <div class="trail-line"></div>
+      <div class="trail-dot"></div>
+      <div class="name">Dulce Olas</div>
+      <div class="dates">Aug 17 – 20</div>
+    </div>
+    <div class="trail-stop">
+      <div class="trail-line"></div>
+      <div class="trail-dot"></div>
+      <div class="name">Manuel Antonio</div>
+      <div class="dates">Aug 20 – 23 · ~4hr drive</div>
+    </div>
+    <div class="trail-stop">
+      <div class="trail-line"></div>
+      <div class="trail-dot"></div>
+      <div class="name">San José</div>
+      <div class="dates">Aug 23 – 25</div>
+    </div>
+  </div>
+</section>
+
+<section id="dulce-olas">
+  <div class="section-label">Stop one</div>
+  <h2 class="section-title">Puerto Jiménez</h2>
+  <div class="stay-card">
+    <h3>Dulce Olas</h3>
+    <div class="stay-meta">Two queen beds + balcony sofa (twin) at the guesthouse, or the guest room / pull-out sofa at the main house. Motorcycle, quad, and surfboards available.</div>
+    <div class="specimens">
+      <div class="specimen">
+        <div class="fig">Fig. 01</div>
+        <div class="name">Surf lessons</div>
+        <div class="desc">Pollo Surf School, right in town.</div>
+        <a href="https://www.pollosurfschool.com/" target="_blank">pollosurfschool.com →</a>
+      </div>
+      <div class="specimen">
+        <div class="fig">Fig. 02</div>
+        <div class="name">Waterfall rappelling</div>
+        <div class="desc">Run by James's friends — highly recommended.</div>
+        <a href="https://www.psychotours.com/tours" target="_blank">psychotours.com →</a>
+      </div>
+      <div class="specimen">
+        <div class="fig">Fig. 03</div>
+        <div class="name">Horseback on the beach</div>
+        <div class="desc">Same outfitter James rode with before.</div>
+        <span class="mono" style="font-size:12.5px; color:var(--ink-soft);">+506-8433-9619</span>
+      </div>
+      <div class="specimen">
+        <div class="fig">Fig. 04</div>
+        <div class="name">Boat tours & fishing</div>
+        <div class="desc">Ask James for Tom's number for a boat day.</div>
+        <a href="https://mysticblue.org/" target="_blank">mysticblue.org →</a>
+      </div>
+      <div class="specimen">
+        <div class="fig">Fig. 05</div>
+        <div class="name">Chocolate tour</div>
+        <div class="desc">Osa Cacao, bean to bar.</div>
+        <a href="https://osacacao.com/" target="_blank">osacacao.com →</a>
+      </div>
+      <div class="specimen">
+        <div class="fig">Fig. 06</div>
+        <div class="name">Sloth garden</div>
+        <div class="desc">Tierra de Perezosos.</div>
+        <a href="https://www.facebook.com/tierradeperezosos/" target="_blank">facebook.com →</a>
+      </div>
+      <div class="specimen">
+        <div class="fig">Fig. 07</div>
+        <div class="name">Lapa Ríos at sunset</div>
+        <div class="desc">High-end eco-lodge — go for drinks, the view is unbeatable.</div>
+        <a href="https://www.laparios.com/" target="_blank">laparios.com →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="manuel-antonio">
+  <div class="section-label">Stop two</div>
+  <h2 class="section-title">Manuel Antonio</h2>
+  <div class="stay-card">
+    <h3>La Mariposa Hotel</h3>
+    <div class="stay-meta">Free shuttle to the beach all day. Book tours directly through the hotel. A tourist trap, but a nice one, with lots to do.</div>
+    <div class="specimens">
+      <div class="specimen">
+        <div class="fig">Fig. 08</div>
+        <div class="name">Zip lining & ATV tours</div>
+        <div class="desc">Bookable through the hotel.</div>
+      </div>
+      <div class="specimen">
+        <div class="fig">Fig. 09</div>
+        <div class="name">Sunset catamaran</div>
+        <div class="desc">Also kayaking, bookable on-site.</div>
+      </div>
+      <div class="specimen">
+        <div class="fig">Fig. 10</div>
+        <div class="name">Manuel Antonio national park</div>
+        <div class="desc">Optional, if you want a park day.</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;">
+      <a href="https://lamariposa.com/hotelcostarica/" target="_blank" style="font-size:12.5px; text-decoration:none; font-weight:500;">lamariposa.com →</a>
+    </div>
+  </div>
+</section>
+
+<section id="san-jose">
+  <div class="section-label">Stop three</div>
+  <h2 class="section-title">San José</h2>
+  <div class="stay-card">
+    <h3>Adventure Inn</h3>
+    <div class="stay-meta">Two final days to explore the city before flying out August 25.</div>
+    <div class="specimens">
+      <div class="specimen">
+        <div class="fig">Fig. 11</div>
+        <div class="name">Gold museum</div>
+        <div class="desc">Pre-Columbian gold collection.</div>
+        <a href="https://museosdelbancocentral.org/eng/exhibiciones/museo-del-oro-precolombino/" target="_blank">museosdelbancocentral.org →</a>
+      </div>
+      <div class="specimen">
+        <div class="fig">Fig. 12</div>
+        <div class="name">Artist market</div>
+        <div class="desc">Mercado Municipal de Artesanía.</div>
+        <a href="https://www.gpsmycity.com/attractions/mercado-municipal-de-artesania-(municipal-market-of-handcrafts)-18509.html" target="_blank">gpsmycity.com →</a>
+      </div>
+      <div class="specimen">
+        <div class="fig">Fig. 13</div>
+        <div class="name">El Arca medicinal garden</div>
+        <div class="desc">A quieter, green stop in the city.</div>
+      </div>
+      <div class="specimen">
+        <div class="fig">Fig. 14</div>
+        <div class="name">La Paz waterfall gardens</div>
+        <div class="desc">Worth the drive out of the city.</div>
+        <a href="https://waterfallgardens.com/" target="_blank">waterfallgardens.com →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="budget">
+  <div class="section-label">Rough numbers</div>
+  <h2 class="section-title">Estimated budget, per person</h2>
+  <div class="ledger">
+    <div class="ledger-group">
+      <h4>Flights</h4>
+      <div class="ledger-row"><span class="item">LAX ↔ San José (round trip, Aug)</span><span class="amt">$350 – $600</span></div>
+      <div class="ledger-row"><span class="item">SANSA, San José ↔ Puerto Jiménez (round trip)</span><span class="amt">$220 – $300</span></div>
+    </div>
+    <div class="ledger-group">
+      <h4>Car rental (split across the group)</h4>
+      <div class="ledger-row"><span class="item">Alamo SUV, 8 days incl. premium insurance</span><span class="amt">$550 – $800 total</span></div>
+    </div>
+    <div class="ledger-group">
+      <h4>Activities</h4>
+      <div class="ledger-row"><span class="item">Surf lesson</span><span class="amt">$50 – $70</span></div>
+      <div class="ledger-row"><span class="item">Waterfall rappel + tree climb combo</span><span class="amt">~$130</span></div>
+      <div class="ledger-row"><span class="item">Horseback riding on the beach</span><span class="amt">$50 – $70</span></div>
+      <div class="ledger-row"><span class="item">Boat day — fishing, diving, or a tour with Tom</span><span class="amt">$100 – $250</span></div>
+      <div class="ledger-row"><span class="item">Chocolate tour</span><span class="amt">$35 – $45</span></div>
+      <div class="ledger-row"><span class="item">Sloth garden</span><span class="amt">$20 – $30</span></div>
+      <div class="ledger-row"><span class="item">Sunset drinks at Lapa Ríos</span><span class="amt">$20 – $40</span></div>
+      <div class="ledger-row"><span class="item">Manuel Antonio: zip line, ATV, or catamaran (each)</span><span class="amt">$60 – $120</span></div>
+    </div>
+    <div class="ledger-group">
+      <h4>Food, 8 days</h4>
+      <div class="ledger-row"><span class="item">Mix of sodas and a few nicer dinners, ~$35–60/day</span><span class="amt">$280 – $480</span></div>
+    </div>
+    <div class="ledger-total">
+      <span class="label">Rough total, per person</span>
+      <span class="amt">$1,675 – $2,915</span>
+    </div>
+  </div>
+  <p class="budget-note">These are estimates pulled from current listings and typical traveler spend, not quotes — actual prices depend on when you book, group size, and how many activities you pick versus skip. Car rental and boat day costs assume they're split across the group, not paid solo.</p>
+</section>
+
+<footer>Built from James's notes · Osa Peninsula, Costa Rica</footer>
+
+<script>
+  const links = document.querySelectorAll('nav a');
+  const sections = document.querySelectorAll('section');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 80) current = sec.id;
+    });
+    links.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+
+</body>
+</html>

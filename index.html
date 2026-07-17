@@ -320,6 +320,104 @@
     margin-top:14px;
   }
 
+  .compare-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:14px;
+    margin-top:18px;
+  }
+  .compare-card{
+    border:1px solid var(--sand-deep);
+    border-radius:10px;
+    padding:16px 18px;
+    background:#FBF6E8;
+    position:relative;
+  }
+  .compare-card.recommended{border:2px solid var(--scarlet);}
+  .compare-badge{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    background:var(--scarlet);
+    color:#FBF6E8;
+    padding:2px 8px;
+    border-radius:4px;
+    margin-bottom:10px;
+  }
+  .compare-card h4{
+    font-family:'Fraunces', serif;
+    font-size:17px;
+    color:var(--canopy);
+    margin-bottom:2px;
+  }
+  .compare-card .airport-code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--teal);
+    margin-bottom:12px;
+  }
+  .compare-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    padding:5px 0;
+    border-bottom:1px dashed var(--sand-deep);
+  }
+  .compare-row:last-child{border-bottom:none;}
+  .compare-row .k{color:var(--ink-soft);}
+  .compare-row .v{font-family:'IBM Plex Mono', monospace; color:var(--ink); text-align:right;}
+
+  .math-block{
+    background:var(--sand);
+    border:1px solid var(--sand-deep);
+    border-radius:8px;
+    padding:16px 20px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .math-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding:6px 0;
+    font-size:14px;
+  }
+  .math-row .term{color:var(--ink); font-family:'Inter', sans-serif; font-size:13.5px;}
+  .math-row .num{color:var(--ink-soft); font-weight:500; white-space:nowrap;}
+  .math-divider{
+    border-top:2px solid var(--canopy);
+    margin:6px 0 2px;
+  }
+  .math-row.total{padding-top:8px;}
+  .math-row.total .term{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--canopy);
+  }
+  .math-row.total .num{
+    font-size:18px;
+    color:var(--canopy);
+    font-weight:500;
+  }
+  .math-row.split{
+    margin-top:10px;
+    background:var(--canopy);
+    border-radius:6px;
+    padding:10px 14px;
+  }
+  .math-row.split .term{
+    font-family:'IBM Plex Mono', monospace;
+    color:#C7D2C6;
+    font-size:12.5px;
+  }
+  .math-row.split .num{
+    color:var(--gold);
+    font-size:17px;
+    font-weight:500;
+  }
+
   footer{
     text-align:center;
     padding:32px 24px 48px;
@@ -400,6 +498,24 @@
     </div>
   </div>
   <p class="ticket-note">Check in with SANSA an hour before the flight — plenty of buffer either way. From LAX, park at one of the lots down the road; the ones running about $10/day include a shuttle. Alamo car rental is walking distance from the Jiménez airstrip — get the premium insurance (~$150 more than mid), then hit the BM grocery store in town before heading to the guesthouse.</p>
+  <div class="compare-grid">
+    <div class="compare-card recommended">
+      <div class="compare-badge">Recommended</div>
+      <h4>Los Angeles</h4>
+      <div class="airport-code">LAX → SJO</div>
+      <div class="compare-row"><span class="k">Round trip</span><span class="v">$350 – $600</span></div>
+      <div class="compare-row"><span class="k">Routing</span><span class="v">Nonstop</span></div>
+      <div class="compare-row"><span class="k">Flight time</span><span class="v">~6 hrs</span></div>
+    </div>
+    <div class="compare-card">
+      <h4>San Diego</h4>
+      <div class="airport-code">SAN → SJO</div>
+      <div class="compare-row"><span class="k">Round trip</span><span class="v">$245 – $340</span></div>
+      <div class="compare-row"><span class="k">Routing</span><span class="v">1+ stop</span></div>
+      <div class="compare-row"><span class="k">Flight time</span><span class="v">~10 – 14 hrs</span></div>
+    </div>
+  </div>
+  <p class="budget-note">San Diego can run $50–$150 cheaper per person, but every route connects — usually through Houston, Mexico City, or Panama — adding several hours each way. LAX's nonstop is why it's the pick for this itinerary.</p>
 </section>
 
 <section id="route">
@@ -549,12 +665,31 @@
   <div class="ledger">
     <div class="ledger-group">
       <h4>Flights</h4>
-      <div class="ledger-row"><span class="item">LAX ↔ San José (round trip, Aug)</span><span class="amt">$350 – $600</span></div>
-      <div class="ledger-row"><span class="item">SANSA, San José ↔ Puerto Jiménez (round trip)</span><span class="amt">$220 – $300</span></div>
+      <div class="compare-grid">
+        <div class="compare-card recommended">
+          <div class="compare-badge">Recommended</div>
+          <h4>Los Angeles</h4>
+          <div class="airport-code">LAX → SJO, nonstop</div>
+          <div class="compare-row"><span class="k">Round trip</span><span class="v">$350 – $600</span></div>
+        </div>
+        <div class="compare-card">
+          <h4>San Diego</h4>
+          <div class="airport-code">SAN → SJO, 1+ stop</div>
+          <div class="compare-row"><span class="k">Round trip</span><span class="v">$245 – $340</span></div>
+        </div>
+      </div>
+      <div class="ledger-row" style="margin-top:12px;"><span class="item">SANSA, San José ↔ Puerto Jiménez (round trip)</span><span class="amt">$220 – $300</span></div>
     </div>
     <div class="ledger-group">
-      <h4>Car rental (split across the group)</h4>
-      <div class="ledger-row"><span class="item">Alamo SUV, 8 days incl. premium insurance</span><span class="amt">$550 – $800 total</span></div>
+      <h4>Car rental — the math</h4>
+      <div class="math-block">
+        <div class="math-row"><span class="term">Base rental, Puerto Jiménez → San José (7 days @ $14.00/day)</span><span class="num">$208.00</span></div>
+        <div class="math-row"><span class="term">Underage fee, driver is 23 (7 days @ $10.00/day)</span><span class="num">+ $70.00</span></div>
+        <div class="math-row"><span class="term">Premium insurance, zero deductible</span><span class="num">+ $322.00</span></div>
+        <div class="math-divider"></div>
+        <div class="math-row total"><span class="term">Total car cost</span><span class="num">$600.00</span></div>
+        <div class="math-row split"><span class="term">÷ 3 people</span><span class="num">$200.00 each</span></div>
+      </div>
     </div>
     <div class="ledger-group">
       <h4>Activities</h4>
@@ -573,10 +708,10 @@
     </div>
     <div class="ledger-total">
       <span class="label">Rough total, per person</span>
-      <span class="amt">$1,675 – $2,915</span>
+      <span class="amt">$1,410 – $2,335</span>
     </div>
   </div>
-  <p class="budget-note">These are estimates pulled from current listings and typical traveler spend, not quotes — actual prices depend on when you book, group size, and how many activities you pick versus skip. Car rental and boat day costs assume they're split across the group, not paid solo.</p>
+  <p class="budget-note">Everything except the car is an estimate pulled from current listings and typical traveler spend — actual prices depend on when you book, group size, and how many activities you pick versus skip. The car math above is the real breakdown for a 23-year-old renter on this specific 7-day reservation, split three ways. The low end of the flight range assumes San Diego instead of LAX.</p>
 </section>
 
 <footer>Built from James's notes · Osa Peninsula, Costa Rica</footer>
